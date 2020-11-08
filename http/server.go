@@ -2,7 +2,6 @@ package http
 
 import (
 	"encoding/json"
-	"github.com/julienschmidt/httprouter"
 	"log"
 	"net/http"
 	"strings"
@@ -30,11 +29,8 @@ func NewServer(d domain) Server {
 	}
 }
 
-func (s *Server) index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	queryParams := r.URL.Query()
-	email := queryParams.Get("email")
-
-	w.Header().Set("Content-Type", "application/json")
+func (s *Server) index(w http.ResponseWriter, r *http.Request) {
+	email := r.URL.Query().Get("email")
 
 	if email == "" {
 		errorResponse, _ := json.Marshal(ErrorResponse{
@@ -60,10 +56,10 @@ func (s *Server) index(w http.ResponseWriter, r *http.Request, _ httprouter.Para
 }
 
 func (s *Server) Run() {
-	router := httprouter.New()
+	mux := http.NewServeMux()
 
-	router.GET("/", s.index)
+	mux.Handle("/", middlewareJson(http.HandlerFunc(s.index)))
 
 	log.Println("Starting to listen on 0.0.0.0:80...")
-	log.Fatal(http.ListenAndServe(":80", router))
+	log.Fatal(http.ListenAndServe(":80", mux))
 }
