@@ -58,7 +58,7 @@ func (s *Server) index(w http.ResponseWriter, r *http.Request) {
 func (s *Server) Run() {
 	mux := http.NewServeMux()
 
-	mux.Handle("/", middlewareJson(http.HandlerFunc(s.index)))
+	mux.Handle("/", middlewareIndexLogger(middlewareJsonHeader(http.HandlerFunc(s.index))))
 
 	log.Println("Starting to listen on 0.0.0.0:80...")
 	log.Fatal(http.ListenAndServe(":80", mux))
