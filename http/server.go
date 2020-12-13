@@ -30,6 +30,17 @@ func NewServer(d domain) Server {
 }
 
 func (s *Server) index(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		errorResponse, _ := json.Marshal(ErrorResponse{
+			Detail: "email query parameter should be set.",
+		})
+
+		w.WriteHeader(405)
+		w.Write(errorResponse)
+
+		return
+	}
+
 	email := r.URL.Query().Get("email")
 
 	if email == "" {
