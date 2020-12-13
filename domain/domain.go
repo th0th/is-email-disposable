@@ -3,7 +3,6 @@ package domain
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 )
 
@@ -20,15 +19,9 @@ func NewDomain() (*Domain, error) {
 		return nil, fmt.Errorf("an error occurred while opening the domains file: %v", err)
 	}
 
-	byteValue, err := ioutil.ReadAll(domainsJsonFile)
-
-	if err != nil {
-		return nil, fmt.Errorf("an error occurred while reading the domains file: %v", err)
-	}
-
 	var domainsSlice []string
 
-	err = json.Unmarshal(byteValue, &domainsSlice)
+	err = json.NewDecoder(domainsJsonFile).Decode(&domainsSlice)
 
 	if err != nil {
 		return nil, fmt.Errorf("an error occurred while parsing the domains file: %v", err)
