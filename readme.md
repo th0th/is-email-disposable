@@ -14,7 +14,7 @@ For example, a `GET` request to `https://isemaildisposable.webgazer.io/?email=jo
 }
 ```
 
-You can send full e-mail address or only the domain, too. If you don't set the `email` query parameter, you will get a `HTTP 400 Bad Request` response.
+You can send a full e-mail address or only the domain, too. If you don't set the `email` query parameter, you will get an `HTTP 400 Bad Request` response.
 
 ## Deploying
 
