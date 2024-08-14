@@ -6,13 +6,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/rs/zerolog/log"
-	"github.com/th0th/is-email-disposable/pkg/common"
+	"github.com/th0th/is-email-disposable/pkg/isemaildisposable"
 	"github.com/th0th/is-email-disposable/pkg/restapi/handler"
 	"github.com/th0th/is-email-disposable/pkg/service/domain"
 )
 
 func main() {
-	common.LogSetDefaults()
+	isemaildisposable.LogSetDefaults()
 
 	domainService, err := domain.New()
 	if err != nil {

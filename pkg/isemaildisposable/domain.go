@@ -1,4 +1,4 @@
-package common
+package isemaildisposable
 
 type DomainService interface {
 	Check(emailOrDomain string) *DomainServiceCheckResult

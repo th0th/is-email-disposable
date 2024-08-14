@@ -3,14 +3,14 @@ package handler
 import (
 	"github.com/go-errors/errors"
 	"github.com/gofiber/fiber/v2"
-	"github.com/th0th/is-email-disposable/pkg/common"
+	"github.com/th0th/is-email-disposable/pkg/isemaildisposable"
 )
 
 type indexQueryParams struct {
 	EmailOrDomain *string `query:"email"`
 }
 
-func Index(domainService common.DomainService) fiber.Handler {
+func Index(domainService isemaildisposable.DomainService) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		queryParams := indexQueryParams{}
 		err := c.QueryParser(&queryParams)

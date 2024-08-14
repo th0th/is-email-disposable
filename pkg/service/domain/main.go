@@ -6,14 +6,14 @@ import (
 	"strings"
 
 	"github.com/go-errors/errors"
-	"github.com/th0th/is-email-disposable/pkg/common"
+	"github.com/th0th/is-email-disposable/pkg/isemaildisposable"
 )
 
 type service struct {
 	domainsMap map[string]bool
 }
 
-func New() (common.DomainService, error) {
+func New() (isemaildisposable.DomainService, error) {
 	csvReader := csv.NewReader(strings.NewReader(domainsCsvFile))
 	records, err := csvReader.ReadAll()
 	if err != nil {
@@ -30,7 +30,7 @@ func New() (common.DomainService, error) {
 	}, nil
 }
 
-func (s *service) Check(emailOrDomain string) *common.DomainServiceCheckResult {
+func (s *service) Check(emailOrDomain string) *isemaildisposable.DomainServiceCheckResult {
 	domain := emailOrDomain
 
 	atIndex := strings.LastIndex(emailOrDomain, "@")
@@ -38,7 +38,7 @@ func (s *service) Check(emailOrDomain string) *common.DomainServiceCheckResult {
 		domain = emailOrDomain[atIndex+1:]
 	}
 
-	return &common.DomainServiceCheckResult{
+	return &isemaildisposable.DomainServiceCheckResult{
 		IsDisposable: s.domainsMap[domain],
 	}
 }
