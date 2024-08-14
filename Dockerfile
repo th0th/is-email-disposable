@@ -1,25 +1,19 @@
-FROM golang:alpine AS builder
+FROM golang:1.23
 
-ENV GO111MODULE=on \
-    CGO_ENABLED=0 \
-    GOOS=linux \
-    GOARCH=amd64
+WORKDIR /usr/src/is-email-disposable
 
-WORKDIR /build
-
-COPY go.mod .
-COPY go.sum .
+COPY go.mod go.sum ./
 RUN go mod download
 
-COPY . .
+COPY cmd cmd
+COPY pkg pkg
 
-RUN go build -o main .
-WORKDIR /dist
-RUN cp /build/main .
+RUN mkdir bin
 
-FROM scratch
+RUN CGO_ENABLED=0 go build -a -o bin/rest-api cmd/restapi/*
 
-COPY --from=builder /dist/main /
-COPY domains.json /
+FROM alpine:3
 
-ENTRYPOINT ["/main"]
+COPY --from=0 /usr/src/is-email-disposable/bin/rest-api /usr/local/bin/is-email-disposable-rest-api
+
+ENTRYPOINT ["is-email-disposable-rest-api"]
