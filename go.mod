@@ -1,6 +1,6 @@
-module github.com/th0th/is-email-disposable
+module github.com/th0th/is-email-disposable/v1
 
-go 1.23
+go 1.23.2
 
 require (
 	github.com/go-errors/errors v1.5.1

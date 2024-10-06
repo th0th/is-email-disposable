@@ -6,7 +6,8 @@ import (
 	"strings"
 
 	"github.com/go-errors/errors"
-	"github.com/th0th/is-email-disposable/pkg/isemaildisposable"
+
+	"github.com/th0th/is-email-disposable/v1/pkg/isemaildisposable"
 )
 
 type service struct {

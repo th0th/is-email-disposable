@@ -1,4 +1,4 @@
-FROM golang:1.23
+FROM golang:1.23.2
 
 WORKDIR /usr/src/is-email-disposable
 
