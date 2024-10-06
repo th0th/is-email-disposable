@@ -4,7 +4,7 @@ import (
 	"github.com/go-errors/errors"
 	"github.com/gofiber/fiber/v2"
 
-	"github.com/th0th/is-email-disposable/v1/pkg/isemaildisposable"
+	"github.com/th0th/is-email-disposable/pkg/isemaildisposable"
 )
 
 type indexQueryParams struct {

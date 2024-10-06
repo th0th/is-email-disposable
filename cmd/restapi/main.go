@@ -7,9 +7,9 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/rs/zerolog/log"
 
-	"github.com/th0th/is-email-disposable/v1/pkg/isemaildisposable"
-	"github.com/th0th/is-email-disposable/v1/pkg/restapi/handler"
-	"github.com/th0th/is-email-disposable/v1/pkg/service/domain"
+	"github.com/th0th/is-email-disposable/pkg/isemaildisposable"
+	"github.com/th0th/is-email-disposable/pkg/restapi/handler"
+	"github.com/th0th/is-email-disposable/pkg/service/domain"
 )
 
 func main() {
